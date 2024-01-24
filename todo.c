@@ -1,9 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "todo.h"
 
-void addTask(Task **tasks, int *taskCount, const char *description) {
+void addTask(Task **tasks, int *taskCount, const char *description)
+{
     *tasks = realloc(*tasks, (*taskCount + 1) * sizeof(Task));
     if (*tasks == NULL) {
         printf("Memory reallocation failed.\n");
@@ -18,13 +16,15 @@ void addTask(Task **tasks, int *taskCount, const char *description) {
     printf("Task added successfully.\n");
 }
 
-void listTasks(const Task tasks[], int taskCount) {
+void listTasks(const Task tasks[], int taskCount)
+{
     for (int i = 0; i < taskCount; ++i) {
         printf("%d. %s %s\n", i + 1, tasks[i].completed ? "[X]" : "[ ]", tasks[i].description);
     }
 }
 
-void markCompleted(Task tasks[], int taskCount, int taskIndex) {
+void markCompleted(Task tasks[], int taskCount, int taskIndex)
+{
     if (taskIndex >= 1 && taskIndex <= taskCount) {
         tasks[taskIndex - 1].completed = 1;
         printf("Task marked as completed.\n");
@@ -33,7 +33,8 @@ void markCompleted(Task tasks[], int taskCount, int taskIndex) {
     }
 }
 
-void saveTasksToFile(const Task tasks[], int taskCount, const char *filename) {
+void saveTasksToFile(const Task tasks[], int taskCount, const char *filename)
+{
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
         printf("Error opening file for writing.\n");
@@ -47,7 +48,8 @@ void saveTasksToFile(const Task tasks[], int taskCount, const char *filename) {
     fclose(file);
 }
 
-void loadTasksFromFile(Task **tasks, int *taskCount, const char *filename) {
+void loadTasksFromFile(Task **tasks, int *taskCount, const char *filename)
+{
     FILE *file = fopen(filename, "a+");
     if (file == NULL) {
         printf("No existing tasks file found.\n");
@@ -73,7 +75,8 @@ void loadTasksFromFile(Task **tasks, int *taskCount, const char *filename) {
     fclose(file);
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     Task *tasks;
     int taskCount = 0;
 
